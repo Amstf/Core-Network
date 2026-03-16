@@ -50,7 +50,26 @@ The core runs as a Docker Compose stack (`docker-compose-slicing.yaml`) with two
 
 ```bash
 cd oai-cn5g
-./start_cn.sh
+./start_cn.sh -m [rfsim|usrp]
+```
+
+The `-m` flag selects the mode depending on where the core is running:
+
+| Mode | Interface | When to use |
+|---|---|---|
+| `rfsim` | `eth0` | Running locally inside an LXC container (RF simulation) |
+| `usrp` | `tun0` | Running on Colosseum with real RF (USRP hardware) |
+
+> `tun0` is the tunnel interface created inside the 5G stack to carry user-plane traffic once a UE data session is established. On Colosseum, UPF gateways must be bound to this interface instead of `eth0`.
+
+**Examples:**
+
+```bash
+# Local / rfsim
+./start_cn.sh -m rfsim
+
+# Colosseum / USRP
+./start_cn.sh -m usrp
 ```
 
 `start_cn.sh` performs the following steps:
@@ -58,11 +77,11 @@ cd oai-cn5g
 1. **Recreates** the `demo-oai-public-net` Docker bridge network (tears down the old one if present)
 2. **Tears down** any previous Compose deployment (`docker-compose down`)
 3. **Starts** all services in detached mode (`docker-compose up -d`)
-4. **Waits 5 seconds**, then injects UPF gateway IPs via `docker exec`:
-   - `oai-upf-slice1` → `12.1.1.1/24` on `eth0`
-   - `oai-upf-slice2` → `12.1.2.1/24` on `eth0`
+4. **Waits 5 seconds**, then injects UPF gateway IPs on the selected interface via `docker exec`:
+   - `oai-upf-slice1` → `12.1.1.1/24`
+   - `oai-upf-slice2` → `12.1.2.1/24`
 
-> **Note:** The `docker exec` step after the sleep can fail silently if the UPF containers are not yet ready. If UEs cannot get an IP, verify with: `docker exec oai-upf-slice1 ip addr show eth0`
+> **Note:** The `docker exec` step can fail silently if the UPF containers are not yet ready. If UEs cannot get an IP, verify with: `docker exec oai-upf-slice1 ip addr show <interface>`
 
 ### External Data Network Routing
 
