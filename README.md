@@ -34,15 +34,6 @@ Core-Network/
 
 ---
 
-## 2. Prerequisites
-
-The following must be installed and operational on the host before running the core network:
-
-- **Docker** and **Docker Compose**
-- **LXC** — required only for Colosseum deployment; refer to [`src/README.md`](src/README.md)
-
----
-
 ## 3. Configuration Overview
 
 ### 3.1 `docker-compose-slicing.yaml` — Service Definitions
@@ -56,13 +47,13 @@ Defines all core NF containers, fixed IP assignments, and inter-service dependen
 | `oai-nrf` | `192.168.70.130` | Network Repository Function |
 | `mysql` | `192.168.70.131` | UE subscription database |
 | `oai-amf` | `192.168.70.132` | Access and Mobility Management |
-| `oai-smf-slice1` | `192.168.70.133` | Session Management — Slice 1 |
-| `oai-upf-slice1` | `192.168.70.134` | User Plane — Slice 1 (DNN `oai`, UE subnet `12.1.1.0/24`) |
 | `oai-ext-dn` | `192.168.70.135` | External data network (iperf server) |
 | `oai-udr` | `192.168.70.136` | Unified Data Repository |
 | `oai-udm` | `192.168.70.137` | Unified Data Management |
 | `oai-ausf` | `192.168.70.138` | Authentication Server |
 | `oai-nssf` | `192.168.70.139` | Network Slice Selection |
+| `oai-smf-slice1` | `192.168.70.133` | Session Management — Slice 1 |
+| `oai-upf-slice1` | `192.168.70.134` | User Plane — Slice 1 (DNN `oai`, UE subnet `12.1.1.0/24`) |
 | `oai-smf-slice2` | `192.168.70.140` | Session Management — Slice 2 |
 | `oai-upf-slice2` | `192.168.70.141` | User Plane — Slice 2 (DNN `oai2`, UE subnet `12.1.2.0/24`) |
 
@@ -142,7 +133,7 @@ Brings up all NF containers in detached mode.
 
 **[4/4] Inject UPF tunnel addresses**
 
-After a short delay, assigns tunnel addresses on the selected interface inside each UPF container:
+Assigns tunnel addresses on the selected interface inside each UPF container:
 
 | Container | Tunnel Address |
 |-----------|---------------|
