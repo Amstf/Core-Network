@@ -29,9 +29,7 @@ Core-Network/
     ├── docker-compose-slicing.yaml   # Core network stack (two slices, dedicated SMF+UPF per slice)
     ├── start_cn.sh                   # Main launch script
     ├── conf/                         # NF configuration files (AMF, SMF, UPF, NSSF, ...)
-    ├── database/                     # MySQL seed data (UE subscriptions and authentication)
-    ├── healthscripts/                # Container health check scripts
-    └── extdn-iperf-logs/             # iperf log output from the external DN container
+    └── database/                     # MySQL seed data (UE subscriptions and authentication)
 ```
 
 ---
