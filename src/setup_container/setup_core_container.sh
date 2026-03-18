@@ -104,9 +104,9 @@ echo "✅ All steps completed successfully for container '$CONTAINER'"
 
 # Step 5: Clone repo and pull Docker images
 
-REPO_URL="git@github.com:Amstf/OAI-CORE-Network.git"
-REPO_DIR="OAI-CORE-Network/oai-cn5g-legacy"
-DOCKER_COMPOSE_FILE="docker-compose-legacy.yml"
+REPO_URL="git@github.com:Amstf/Core-Network.git"
+REPO_DIR="Core-Network/oai-cn5g"
+DOCKER_COMPOSE_FILE="docker-compose-slicing.yaml"
 
 echo "▶️  [4/4] Cloning repository and pulling Docker images..."
 lxc exec "$CONTAINER" -- bash -c "git clone $REPO_URL"
