@@ -35,6 +35,17 @@ echo "▶️  [2/4] Running import_and_launch.sh..."
   echo "❌ Failed to import/launch container."; exit 1;
 }
 
+# Step 2b: Set container privileges for Docker-in-LXC
+echo "▶️  [2b/4] Configuring container privileges..."
+lxc stop "$CONTAINER"
+lxc config set "$CONTAINER" security.privileged true
+lxc config set "$CONTAINER" security.nesting true
+lxc config set "$CONTAINER" raw.lxc "lxc.cap.drop ="
+lxc start "$CONTAINER"
+sleep 5
+echo "✅ Container privileges configured."
+
+
 # Step 3: Fix network
 echo "▶️  [3/4] Running set_lxc_network.sh..."
 ./set_lxc_network.sh "$CONTAINER" || {
