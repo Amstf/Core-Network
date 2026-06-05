@@ -40,7 +40,7 @@ docker network create \
   --gateway=192.168.70.129 \
   demo-oai-public-net >/dev/null 2>&1
 
-COMPOSE_FILE="docker-compose-legacy-slicing.yaml"
+COMPOSE_FILE="docker-compose-slicing.yaml"
 
 echo "[slicing] Bringing down previous deployment (if any)"
 docker-compose -f "${COMPOSE_FILE}" down

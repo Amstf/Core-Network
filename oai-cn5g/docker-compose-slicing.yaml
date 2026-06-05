@@ -120,8 +120,6 @@ services:
         cap_add:
             - NET_ADMIN
             - SYS_ADMIN
-        cap_drop:
-            - ALL
         privileged: true
         networks:
             public_net:
@@ -139,8 +137,7 @@ services:
         cap_add:
             - NET_ADMIN
             - SYS_ADMIN
-        cap_drop:
-            - ALL
+        
         privileged: true
         networks:
             public_net:
